@@ -1,0 +1,31 @@
+# .circleci/config.yml
+version: 2.1
+
+jobs:
+  build-medium:
+    machine:
+      image: ubuntu-2004:202107-02
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: cat /proc/cpuinfo
+      - run: lscpu
+      - run: uptime
+      - run: echo "Hello, Arm!"
+      - run: sudo dumpe2fs $(mount | grep 'on \/ ' | awk '{print $1}') | grep 'Filesystem created:'
+
+
+  build-large:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.large
+    steps:
+      - run: uname -a
+      - run: cat /proc/cpuinfo
+      - run: echo "Hello, Arm!"
+
+workflows:
+  build:
+    jobs:
+      - build-medium
+      - build-large
