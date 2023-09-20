@@ -5,7 +5,7 @@ FROM node:14
 WORKDIR /app
 
 # Copy the package.json and package-lock.json files to the container
-COPY package*.json ./
+# COPY package*.json ./
 
 # Install app dependencies
 RUN npm install
@@ -17,5 +17,5 @@ COPY . .
 EXPOSE 3000
 
 # Define the command to start your Node.js application
-CMD [ "npm", "start" ]
+# CMD [ "npm", "start" ]
 
